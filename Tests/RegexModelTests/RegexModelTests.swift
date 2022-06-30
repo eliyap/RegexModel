@@ -8,4 +8,20 @@ final class RegexModelTests: XCTestCase {
         // results.
         XCTAssertEqual(RegexModel().text, "Hello, World!")
     }
+    
+    func testOneOrMore() throws {
+        let pattern = ComponentModel.oneOrMore(.init(components: [
+            .string(.init(string: "cat")),
+        ])).regex()
+        
+        XCTAssertNotNil(try pattern.wholeMatch(in: "cat"))
+        XCTAssertNotNil(try pattern.wholeMatch(in: "catcat"))
+        XCTAssertNotNil(try pattern.wholeMatch(in: "catcatcat"))
+        
+        /// Wrong string.
+        XCTAssertNil(try pattern.wholeMatch(in: "dog"))
+        
+        /// Zero matches.
+        XCTAssertNil(try pattern.wholeMatch(in: ""))
+    }
 }
