@@ -22,3 +22,19 @@ public extension RandomAccessCollection where Element == ComponentModel, Index =
         }
     }
 }
+
+public extension RandomAccessCollection where Element == ComponentModel, Index == Int {
+    /// Loose analogy to `@AlternationBuilder`, allows runtime combination of arrays.
+    func choice() -> ChoiceOf<Substring> {
+        if count == 1 {
+            return ChoiceOf {
+                self[startIndex].regex()
+            }
+        } else {
+            return ChoiceOf {
+                self[startIndex].regex()
+                self[(startIndex+1)..<endIndex].choice()
+            }
+        }
+    }
+}

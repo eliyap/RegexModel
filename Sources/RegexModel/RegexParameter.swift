@@ -155,9 +155,7 @@ public struct ChoiceOfParameter: RegexParameter {
     
     public func regex() -> Regex<Substring> {
         Regex {
-            OneOrMore {
-                components.regex()
-            }
+            components.choice()
         }
     }
 }

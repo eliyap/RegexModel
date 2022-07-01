@@ -2,6 +2,9 @@ import XCTest
 @testable import RegexModel
 
 final class RegexModelTests: XCTestCase {
+    
+    var pattern: Regex<Substring>! = nil
+    
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
@@ -10,7 +13,7 @@ final class RegexModelTests: XCTestCase {
     }
     
     func testOneOrMore() throws {
-        let pattern = ComponentModel.oneOrMore(.init(components: [
+        pattern = ComponentModel.oneOrMore(.init(components: [
             .string(.init(string: "cat")),
         ])).regex()
         
@@ -23,5 +26,32 @@ final class RegexModelTests: XCTestCase {
         
         /// Zero matches.
         XCTAssertNil(try pattern.wholeMatch(in: ""))
+    }
+    
+    func testChoiceOf() throws {
+        pattern = ComponentModel.choiceOf(.init(components: [
+            .string(.init(string: "cat")),
+            .string(.init(string: "dog")),
+            .string(.init(string: "fish")),
+        ])).regex()
+        
+        XCTAssertNotNil(try pattern.wholeMatch(in: "cat"))
+        XCTAssertNotNil(try pattern.wholeMatch(in: "dog"))
+        XCTAssertNotNil(try pattern.wholeMatch(in: "fish"))
+        
+        /// Ensures we did NOT use concatenation.
+        XCTAssertNil(try pattern.wholeMatch(in: "catdogfish"))
+        
+        pattern = ComponentModel.oneOrMore(.init(components: [
+            .choiceOf(.init(components: [
+                .string(.init(string: "cat")),
+                .string(.init(string: "dog")),
+                .string(.init(string: "fish")),
+            ]))
+        ])).regex()
+        
+        XCTAssertNotNil(try pattern.wholeMatch(in: "catdogfish"))
+        XCTAssertNotNil(try pattern.wholeMatch(in: "dogcatfish"))
+        XCTAssertNotNil(try pattern.wholeMatch(in: "fishdogcat"))
     }
 }
