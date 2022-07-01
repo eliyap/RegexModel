@@ -24,6 +24,9 @@ extension ComponentModel {
                 switch self {
                 case .string:
                     fatalError("Cannot index into leaf node \(self)")
+
+                case .anchor:
+                    fatalError("Cannot index into leaf node \(self)")
                 
                 case .zeroOrMore(let zeroOrMoreParameter):
                     return zeroOrMoreParameter.components[index][subpath]
@@ -50,6 +53,9 @@ extension ComponentModel {
             case .child(let index, let subpath):
                 switch self {
                 case .string:
+                    fatalError("Cannot index into leaf node \(self)")
+
+                case .anchor:
                     fatalError("Cannot index into leaf node \(self)")
 
                 case .zeroOrMore(var zeroOrMoreParameter):

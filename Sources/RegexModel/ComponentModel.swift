@@ -20,6 +20,7 @@ public enum ComponentModel {
     
     /// Others
     case choiceOf(ChoiceOfParameter)
+    case anchor(AnchorParameter)
     
     func regex() -> Regex<Substring> {
         switch self {
@@ -40,6 +41,9 @@ public enum ComponentModel {
 
         case .choiceOf(let choiceOfParameter):
             return choiceOfParameter.regex()
+
+        case .anchor(let anchorParameter):
+            return anchorParameter.regex()
         }
     }
 }
@@ -63,6 +67,8 @@ extension ComponentModel: Identifiable {
             return repeatParameter.id
         case .choiceOf(let choiceOfParameter):
             return choiceOfParameter.id
+        case .anchor(let anchorParameter):
+            return anchorParameter.id
         }
     }
 }
