@@ -128,15 +128,17 @@ public struct RepeatParameter: RegexParameter {
 }
 
 // MARK: - Others
-struct LookaheadParameter: RegexParameter {
+public struct LookaheadParameter: RegexParameter {
     #warning("under development")
     public let id = UUID().uuidString
     
+    public var negative: Bool
+    
     public var components: [ComponentModel]
     
-    func regex() -> Regex<Substring> {
+    public func regex() -> Regex<Substring> {
         Regex {
-            OneOrMore {
+            Lookahead(negative: negative) {
                 components.regex()
             }
         }
