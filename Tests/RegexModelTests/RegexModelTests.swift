@@ -5,13 +5,6 @@ final class RegexModelTests: XCTestCase {
     
     var pattern: Regex<Substring>! = nil
     
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(RegexModel().text, "Hello, World!")
-    }
-    
     func testOneOrMore() throws {
         pattern = ComponentModel.oneOrMore(.init(components: [
             .string(.init(string: "cat")),
