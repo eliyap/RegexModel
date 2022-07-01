@@ -160,18 +160,48 @@ public struct ChoiceOfParameter: RegexParameter {
     }
 }
 
-struct AnchorParameter: RegexParameter {
-    #warning("under development")
-
+public struct AnchorParameter: RegexParameter {
+    
+    /// Thin wrapper enum around static vars.
+    public enum Boundary {
+        case endOfLine
+        case endOfSubject
+        case endOfSubjectBeforeNewline
+        case firstMatchingPositionInSubject
+        case startOfLine
+        case startOfSubject
+        case textSegmentBoundary
+        case wordBoundary
+        
+        public var anchor: Anchor {
+            switch self {
+            case .endOfLine:
+                return .endOfLine
+            case .endOfSubject:
+                return .endOfSubject
+            case .endOfSubjectBeforeNewline:
+                return .endOfSubjectBeforeNewline
+            case .firstMatchingPositionInSubject:
+                return .firstMatchingPositionInSubject
+            case .startOfLine:
+                return .startOfLine
+            case .startOfSubject:
+                return .startOfSubject
+            case .textSegmentBoundary:
+                return .textSegmentBoundary
+            case .wordBoundary:
+                return .wordBoundary
+            }
+        }
+    }
+    
     public let id = UUID().uuidString
     
-    public var components: [ComponentModel]
+    public var boundary: Boundary
     
     public func regex() -> Regex<Substring> {
         Regex {
-            OneOrMore {
-                components.regex()
-            }
+            boundary.anchor
         }
     }
 }
