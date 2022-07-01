@@ -54,4 +54,22 @@ final class RegexModelTests: XCTestCase {
         XCTAssertNotNil(try pattern.wholeMatch(in: "dogcatfish"))
         XCTAssertNotNil(try pattern.wholeMatch(in: "fishdogcat"))
     }
+    
+    func testAnchor() throws {
+        pattern = [
+            .anchor(.init(boundary: .wordBoundary)),
+            .string(.init(string: "dog")),
+            .anchor(.init(boundary: .wordBoundary)),
+        ].regex()
+        
+        XCTAssertNotNil(try pattern.firstMatch(in: "dog food"))
+        XCTAssertNotNil(try pattern.firstMatch(in: "my dog"))
+        XCTAssertNotNil(try pattern.firstMatch(in: "my dog food"))
+        
+        /// Punctuation is a word boundary
+        XCTAssertNotNil(try pattern.firstMatch(in: "up-dog"))
+        
+        XCTAssertNil(try pattern.firstMatch(in: "doghouse"))
+        XCTAssertNil(try pattern.firstMatch(in: "hotdog"))
+    }
 }

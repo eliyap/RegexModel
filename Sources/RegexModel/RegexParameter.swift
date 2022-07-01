@@ -163,6 +163,7 @@ public struct ChoiceOfParameter: RegexParameter {
 public struct AnchorParameter: RegexParameter {
     
     /// Thin wrapper enum around static vars.
+    /// Mirrors internal `Kind` at source https://github.com/apple/swift-experimental-string-processing/blob/290ce1060beb906e62ac54d4debf13cfbb992b6b/Sources/RegexBuilder/Anchor.swift
     public enum Boundary {
         case endOfLine
         case endOfSubject
