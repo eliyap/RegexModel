@@ -72,4 +72,18 @@ final class RegexModelTests: XCTestCase {
         XCTAssertNil(try pattern.firstMatch(in: "doghouse"))
         XCTAssertNil(try pattern.firstMatch(in: "hotdog"))
     }
+    
+    func testLookahead() throws {
+        pattern = [
+            .string(.init(string: "q")),
+            .lookahead(.init(negative: true, components: [
+                .string(.init(string: "u")),
+            ]))
+        ].regex()
+        
+        XCTAssertNotNil(try pattern.firstMatch(in: "Sadiq"))
+        XCTAssertNotNil(try pattern.firstMatch(in: "qing"))
+        
+        XCTAssertNil(try pattern.firstMatch(in: "quote"))
+    }
 }

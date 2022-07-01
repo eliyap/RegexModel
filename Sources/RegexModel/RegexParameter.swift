@@ -129,7 +129,7 @@ public struct RepeatParameter: RegexParameter {
 
 // MARK: - Others
 public struct LookaheadParameter: RegexParameter {
-    #warning("under development")
+    
     public let id = UUID().uuidString
     
     public var negative: Bool
