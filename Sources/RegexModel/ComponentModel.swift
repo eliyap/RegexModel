@@ -19,6 +19,7 @@ public enum ComponentModel {
     case `repeat`(RepeatParameter)
     
     /// Others
+    case lookahead(LookaheadParameter)
     case choiceOf(ChoiceOfParameter)
     case anchor(AnchorParameter)
     
@@ -38,6 +39,9 @@ public enum ComponentModel {
 
         case .repeat(let repeatParameter):
             return repeatParameter.regex()
+
+        case .lookahead(let lookaheadParameter):
+            return lookaheadParameter.regex()
 
         case .choiceOf(let choiceOfParameter):
             return choiceOfParameter.regex()
@@ -65,6 +69,8 @@ extension ComponentModel: Identifiable {
             return optionallyParameter.id
         case .repeat(let repeatParameter):
             return repeatParameter.id
+        case .lookahead(let lookaheadParameter):
+            return lookaheadParameter.id
         case .choiceOf(let choiceOfParameter):
             return choiceOfParameter.id
         case .anchor(let anchorParameter):

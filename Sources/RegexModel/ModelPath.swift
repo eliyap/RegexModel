@@ -40,6 +40,9 @@ extension ComponentModel {
                 case .repeat(let repeatParameter):
                     return repeatParameter.components[index][subpath]
 
+                case .lookahead(let lookaheadParameter):
+                    return lookaheadParameter.components[index][subpath]
+
                 case .choiceOf(let choiceOfParameter):
                     return choiceOfParameter.components[index][subpath]
                 }
@@ -74,6 +77,10 @@ extension ComponentModel {
                     repeatParameter.components[index][subpath] = newValue
                     self = .repeat(repeatParameter)
 
+                case .lookahead(var lookaheadParameter):
+                    lookaheadParameter.components[index][subpath] = newValue
+                    self = .lookahead(lookaheadParameter)
+                
                 case .choiceOf(var choiceOfParameter):
                     choiceOfParameter.components[index][subpath] = newValue
                     self = .choiceOf(choiceOfParameter)
