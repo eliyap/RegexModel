@@ -127,6 +127,38 @@ public struct RepeatParameter: RegexParameter {
     }
 }
 
+#warning("TODO: revisit when AnyRegexOuput works")
+//// MARK: - Captures
+//public struct CaptureParameter: RegexParameter {
+//
+//    public static func == (lhs: CaptureParameter, rhs: CaptureParameter) -> Bool {
+//        lhs.id == rhs.id && lhs.components == rhs.components
+//    }
+//
+//    public func hash(into hasher: inout Hasher) {
+//        hasher.combine(id)
+//        hasher.combine(components)
+//    }
+//
+//    public let id = UUID().uuidString
+//
+//    public let reference: RegexBuilder.Reference<Substring>
+//
+//    public var components: [ComponentModel]
+//
+//    public func regex() -> Regex<Substring> {
+//        Regex {
+//            Capture(as: reference) { components.regex() }
+//        }
+//    }
+//
+//    public func _regex() -> Regex<(Substring, Substring)> {
+//        Regex {
+//            Capture(as: reference) { components.regex() }
+//        }
+//    }
+//}
+
 // MARK: - Others
 public struct LookaheadParameter: RegexParameter {
     
