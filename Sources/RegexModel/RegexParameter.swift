@@ -13,6 +13,9 @@ import RegexBuilder
 /// - Note: `Hashable` required for `ForEach` conformance.
 @available(macOS 13.0, iOS 16, *)
 public protocol RegexParameter: Hashable, Identifiable {
+    
+    var id: String { get }
+    
     /// Construct the component from the parameters.
     /// Since `Regex<Substring>` is a concrete implementation of the `RegexComponent` protocol,
     /// it is a good choice to acheive "type erasure".
