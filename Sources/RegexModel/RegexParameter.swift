@@ -168,6 +168,11 @@ public struct LookaheadParameter: RegexParameter {
     
     public var components: [ComponentModel]
     
+    public init(negative: Bool, components: [ComponentModel]) {
+        self.negative = negative
+        self.components = components
+    }
+    
     public func regex() -> Regex<Substring> {
         Regex {
             Lookahead(negative: negative) {
@@ -233,6 +238,10 @@ public struct AnchorParameter: RegexParameter {
     public let id = UUID().uuidString
     
     public var boundary: Boundary
+    
+    public init(boundary: Boundary) {
+        self.boundary = boundary
+    }
     
     public func regex() -> Regex<Substring> {
         Regex {
