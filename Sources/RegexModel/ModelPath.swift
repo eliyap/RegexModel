@@ -11,6 +11,20 @@ import Foundation
 public indirect enum ModelPath {
     case target
     case child(index: Int, subpath: ModelPath)
+    
+    public func appending(_ other: ModelPath) -> ModelPath {
+        switch self {
+        case .target:
+            return other
+        case .child(let index, let subpath):
+            switch subpath {
+            case .target:
+                return .child(index: index, subpath: other)
+            case .child:
+                return .child(index: index, subpath: subpath.appending(other))
+            }
+        }
+    }
 }
 
 extension ComponentModel {
