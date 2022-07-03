@@ -16,6 +16,9 @@ public protocol RegexParameter: Hashable, Identifiable {
     
     var id: String { get }
     
+    /// Explicitly generate a new parameter struct.
+    func createNew() -> Self
+    
     /// Construct the component from the parameters.
     /// Since `Regex<Substring>` is a concrete implementation of the `RegexComponent` protocol,
     /// it is a good choice to acheive "type erasure".
@@ -33,6 +36,10 @@ public struct StringParameter: RegexParameter {
     
     public init(string: String) {
         self.string = string
+    }
+    
+    public func createNew() -> StringParameter {
+        .init(string: "")
     }
     
     public func regex() -> Regex<Substring> {
@@ -56,6 +63,10 @@ public struct ZeroOrMoreParameter: RegexParameter {
         self.components = components
     }
     
+    public func createNew() -> ZeroOrMoreParameter {
+        .init(behaviour: nil, components: [])
+    }
+    
     public func regex() -> Regex<Substring> {
         Regex {
             ZeroOrMore(behaviour) {
@@ -75,6 +86,10 @@ public struct OneOrMoreParameter: RegexParameter {
     public init(behaviour: RegexRepetitionBehavior? = nil, components: [ComponentModel]) {
         self.behaviour = behaviour
         self.components = components
+    }
+    
+    public func createNew() -> OneOrMoreParameter {
+        .init(behaviour: nil, components: [])
     }
     
     public func regex() -> Regex<Substring> {
@@ -98,6 +113,10 @@ public struct OptionallyParameter: RegexParameter {
         self.components = components
     }
     
+    public func createNew() -> OptionallyParameter {
+        .init(behaviour: nil, components: [])
+    }
+    
     public func regex() -> Regex<Substring> {
         Regex {
             Optionally(behaviour) {
@@ -119,6 +138,10 @@ public struct RepeatParameter: RegexParameter {
         self.range = range
         self.behaviour = behaviour
         self.components = components
+    }
+    
+    public func createNew() -> RepeatParameter {
+        .init(range: 1..<2, behaviour: nil, components: [])
     }
     
     public func regex() -> Regex<Substring> {
@@ -176,6 +199,10 @@ public struct LookaheadParameter: RegexParameter {
         self.components = components
     }
     
+    public func createNew() -> LookaheadParameter {
+        .init(negative: false, components: [])
+    }
+    
     public func regex() -> Regex<Substring> {
         Regex {
             Lookahead(negative: negative) {
@@ -193,6 +220,10 @@ public struct ChoiceOfParameter: RegexParameter {
     
     public init(components: [ComponentModel]) {
         self.components = components
+    }
+    
+    public func createNew() -> ChoiceOfParameter {
+        .init(components: [])
     }
     
     public func regex() -> Regex<Substring> {
@@ -244,6 +275,10 @@ public struct AnchorParameter: RegexParameter {
     
     public init(boundary: Boundary) {
         self.boundary = boundary
+    }
+    
+    public func createNew() -> AnchorParameter {
+        .init(boundary: .wordBoundary)
     }
     
     public func regex() -> Regex<Substring> {
