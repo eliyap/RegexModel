@@ -47,6 +47,41 @@ public indirect enum ModelPath {
             return subpath.isSubpathOf(otherSubpath)
         }
     }
+    
+    public func adjustedFor(insertionAt other: ModelPath) -> ModelPath {
+        guard case .child(let index, let subpath) = self else {
+            assert(false, "Should be handled by parent.")
+            return self
+        }
+
+        guard case .child(let otherIndex, let otherSubpath) = other else {
+            assert(false, "Should be handled by parent.")
+            return self
+        }
+        
+        switch (subpath, otherSubpath) {
+        case (_, .target):
+            /// Offset self to account for insertion.
+            if otherIndex <= index {
+                return .child(index: index+1, subpath: subpath)
+            } else {
+                return self
+            }
+        
+        case (.child, .child):
+            if index == otherIndex {
+                /// Pointing to same child, push the problem down a level.
+                let adjustedSubpath = subpath.adjustedFor(insertionAt: otherSubpath)
+                return .child(index: index, subpath: adjustedSubpath)
+            } else {
+                /// Pointing to different children, no adjustment needed.
+                return self
+            }
+        
+        case (.target, .child):
+            return self
+        }
+    }
 }
 
 extension ComponentModel {
@@ -168,6 +203,65 @@ extension ComponentModel {
         case .choiceOf(var params):
             params.components.insert(component, at: index)
             self = .choiceOf(params)
+        }
+    }
+    
+    public mutating func delete(at path: ModelPath) -> Void {
+        guard case .child(let index, let subpath) = path else {
+            assert(false, "Should be handled by parent")
+            return
+        }
+
+        switch subpath {
+        case .target:
+            switch self {
+            case .string, .anchor:
+                assert(false, "\(self) has no children to remove")
+                return
+            case .zeroOrMore(var params):
+                params.components.remove(at: index)
+                self = .zeroOrMore(params)
+            case .oneOrMore(var params):
+                params.components.remove(at: index)
+                self = .oneOrMore(params)
+            case .optionally(var params):
+                params.components.remove(at: index)
+                self = .optionally(params)
+            case .repeat(var params):
+                params.components.remove(at: index)
+                self = .repeat(params)
+            case .lookahead(var params):
+                params.components.remove(at: index)
+                self = .lookahead(params)
+            case .choiceOf(var params):
+                params.components.remove(at: index)
+                self = .choiceOf(params)
+            }
+        
+        case .child:
+            switch self {
+            case .string, .anchor:
+                assert(false, "\(self) has no children to remove")
+                return
+            case .zeroOrMore(var params):
+                params.components[index].delete(at: subpath)
+                self = .zeroOrMore(params)
+            case .oneOrMore(var params):
+                params.components[index].delete(at: subpath)
+                self = .oneOrMore(params)
+            case .optionally(var params):
+                params.components[index].delete(at: subpath)
+                self = .optionally(params)
+            case .repeat(var params):
+                params.components[index].delete(at: subpath)
+                self = .repeat(params)
+            case .lookahead(var params):
+                params.components[index].delete(at: subpath)
+                self = .lookahead(params)
+            case .choiceOf(var params):
+                params.components[index].delete(at: subpath)
+                self = .choiceOf(params)
+            }
         }
     }
 }
