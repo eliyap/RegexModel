@@ -8,7 +8,7 @@
 import Foundation
 
 /// Recursive tree path copied from the PaneLess project.
-indirect enum ModelPath {
+public indirect enum ModelPath {
     case target
     case child(index: Int, subpath: ModelPath)
 }
