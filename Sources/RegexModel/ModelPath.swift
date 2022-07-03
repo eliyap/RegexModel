@@ -170,9 +170,9 @@ extension ComponentModel {
             fatalError("Illegal state")
         }
 
-        if case .child(_, let childSubpath) = subpath {
+        if case .child = subpath {
             /// Recursively ask child to handle it.
-            self[.child(index: index, subpath: .target)].insert(component, at: childSubpath)
+            self[.child(index: index, subpath: .target)].insert(component, at: subpath)
             return
         }
 
