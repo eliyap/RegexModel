@@ -44,20 +44,20 @@ public extension Color {
 
 public extension ComponentModel {
     /// Represents the models without the associated values, for table purposes.
-    enum Proxy: Int, CaseIterable, Codable {
+    enum Proxy: String, CaseIterable, Codable {
         /// Text
-        case string     = 0
-        case anchor     = 1
+        case string
+        case anchor
         
         /// Quantifiers
-        case zeroOrMore = 2
-        case oneOrMore  = 3
-        case optionally = 4
-        case `repeat`   = 5
+        case zeroOrMore
+        case oneOrMore
+        case optionally
+        case `repeat`
         
         /// Others
-        case lookahead  = 6
-        case choiceOf   = 7
+        case lookahead
+        case choiceOf   
     }
 }
 
