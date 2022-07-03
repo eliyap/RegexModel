@@ -11,16 +11,22 @@ import Foundation
 public indirect enum ModelPath {
     case target
     case child(index: Int, subpath: ModelPath)
-    
+ 
+    /// Appends `other` as to the end of `self`, removing the leaf `.target` node.
     public func appending(_ other: ModelPath) -> ModelPath {
         switch self {
         case .target:
+            /// Special case: tree has depth 1.
             return other
+        
         case .child(let index, let subpath):
             switch subpath {
             case .target:
+                /// Replace `.target` with new subpath.
                 return .child(index: index, subpath: other)
+            
             case .child:
+                /// Recurse.
                 return .child(index: index, subpath: subpath.appending(other))
             }
         }
