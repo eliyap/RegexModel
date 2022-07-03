@@ -50,7 +50,7 @@ public indirect enum ModelPath {
 }
 
 extension ComponentModel {
-    subscript(_ path: ModelPath) -> ComponentModel {
+    public subscript(_ path: ModelPath) -> ComponentModel {
         get {
             switch path {
             case .target:
@@ -122,6 +122,52 @@ extension ComponentModel {
                     self = .choiceOf(choiceOfParameter)
                 }
             }
+        }
+    }
+    
+    /// - Parameters:
+    ///   - component: component to insert
+    ///   - path: path to insert at
+    public mutating func insert(_ component: ComponentModel, at path: ModelPath) -> Void {
+        /// Should always be handled by parents or grandparents, never the child directly.
+        guard case .child(let index, let subpath) = path else {
+            Swift.debugPrint(self)
+            fatalError("Illegal state")
+        }
+
+        if case .child(_, let childSubpath) = subpath {
+            /// Recursively ask child to handle it.
+            self[.child(index: index, subpath: .target)].insert(component, at: childSubpath)
+            return
+        }
+
+        switch self {
+        case .string, .anchor:
+            fatalError("\(self) has no children to insert into!")
+        
+        case .zeroOrMore(var params):
+            params.components.insert(component, at: index)
+            self = .zeroOrMore(params)
+            
+        case .oneOrMore(var params):
+            params.components.insert(component, at: index)
+            self = .oneOrMore(params)
+            
+        case .optionally(var params):
+            params.components.insert(component, at: index)
+            self = .optionally(params)
+            
+        case .repeat(var params):
+            params.components.insert(component, at: index)
+            self = .repeat(params)
+            
+        case .lookahead(var params):
+            params.components.insert(component, at: index)
+            self = .lookahead(params)
+            
+        case .choiceOf(var params):
+            params.components.insert(component, at: index)
+            self = .choiceOf(params)
         }
     }
 }
