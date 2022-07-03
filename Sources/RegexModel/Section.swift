@@ -9,20 +9,20 @@ import Foundation
 import SwiftUI
 
 public extension ComponentModel {
-    enum Section: CaseIterable {
+    enum Section: Int, CaseIterable, Codable {
         /// Color for blocks representing "textual" elements,
         /// including `String`, `Character`, `CharacterClass`, and `Anchor`.
-        case text
+        case text = 0
         
         /// Color for blocks representing "counting" behaviors,
         /// including `ZeroOrMore`, `OneOrMore`, `Optionally`, `Repeat`, and `One`.
-        case quantifier
+        case quantifier = 1
         
         /// Color for blocks representing or affecting "capturing" behaviors,
-        case capture
+        case capture = 2
         
         /// Color for blocks representing other behaviours.
-        case other
+        case other = 3
     }
 }
 
