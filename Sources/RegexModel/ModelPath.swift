@@ -31,6 +31,22 @@ public indirect enum ModelPath {
             }
         }
     }
+    
+    /// Checks whether one path is "contained" by another.
+    /// Paths are considered to contain themselves.
+    public func isSubpathOf(_ other: ModelPath) -> Bool {
+        switch (self, other) {
+        case (.target, .target), (.child, .target):
+            return true
+        
+        case (.target, .child):
+            return false
+            
+        case (.child(let idx, let subpath), .child(let otherIdx, let otherSubpath)):
+            guard idx == otherIdx else { return false }
+            return subpath.isSubpathOf(otherSubpath)
+        }
+    }
 }
 
 extension ComponentModel {
