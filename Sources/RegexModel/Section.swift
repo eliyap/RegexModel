@@ -61,7 +61,7 @@ public extension ComponentModel {
     }
 }
 
-extension ComponentModel.Proxy {
+public extension ComponentModel.Proxy {
     var section: ComponentModel.Section {
         switch self {
         case .string, .anchor:
@@ -74,7 +74,7 @@ extension ComponentModel.Proxy {
     }
 }
 
-extension ComponentModel.Section {
+public extension ComponentModel.Section {
     /// Array type guarantees a stable order, specifically declaration order.
     var proxyItems: [ComponentModel.Proxy] {
         ComponentModel.Proxy.allCases.filter { $0.section == self }
