@@ -103,3 +103,47 @@ extension ComponentModel {
         }
     }
 }
+
+public extension ComponentModel {
+    /// Finds the path of the component with given `id`, if any.
+    func path(for id: String) -> ModelPath? {
+        if id == self.id {
+            return .target
+        }
+        
+        let components: [ComponentModel]
+        
+        switch self {
+        case .string:
+            return nil
+        
+        case .anchor:
+            return nil
+        
+        case .zeroOrMore(let zeroOrMoreParameter):
+            components = zeroOrMoreParameter.components
+        
+        case .oneOrMore(let oneOrMoreParameter):
+            components = oneOrMoreParameter.components
+        
+        case .optionally(let optionallyParameter):
+            components = optionallyParameter.components
+        
+        case .repeat(let repeatParameter):
+            components = repeatParameter.components
+        
+        case .lookahead(let lookaheadParameter):
+            components = lookaheadParameter.components
+        
+        case .choiceOf(let choiceOfParameter):
+            components = choiceOfParameter.components
+        }
+        
+        for (idx, child) in components.enumerated() {
+            guard let subPath = child.path(for: id) else { continue }
+            return .child(index: idx, subpath: subPath)
+        }
+        
+        return nil
+    }
+}
