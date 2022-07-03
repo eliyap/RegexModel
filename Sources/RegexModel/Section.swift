@@ -58,6 +58,48 @@ public extension ComponentModel {
         /// Others
         case lookahead
         case choiceOf   
+        
+        public var displayTitle: String {
+            switch self {
+            case .string:
+                return "String"
+            case .anchor:
+                return "Anchor"
+            case .zeroOrMore:
+                return "Zero Or More"
+            case .oneOrMore:
+                return "One Or More"
+            case .optionally:
+                return "Optionally"
+            case .repeat:
+                return "Repeat"
+            case .lookahead:
+                return "Lookahead"
+            case .choiceOf:
+                return "Choice Of"
+            }
+        }
+    }
+    
+    var proxy: Proxy {
+        switch self {
+        case .string:
+            return .string
+        case .zeroOrMore:
+            return .zeroOrMore
+        case .oneOrMore:
+            return .oneOrMore
+        case .optionally:
+            return .optionally
+        case .repeat:
+            return .repeat
+        case .lookahead:
+            return .lookahead
+        case .choiceOf:
+            return .choiceOf
+        case .anchor:
+            return .anchor
+        }
     }
 }
 
