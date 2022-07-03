@@ -17,7 +17,7 @@ public protocol RegexParameter: Hashable, Identifiable {
     var id: String { get }
     
     /// Explicitly generate a new parameter struct.
-    func createNew() -> Self
+    static func createNew() -> Self
     
     /// Construct the component from the parameters.
     /// Since `Regex<Substring>` is a concrete implementation of the `RegexComponent` protocol,
@@ -38,7 +38,7 @@ public struct StringParameter: RegexParameter {
         self.string = string
     }
     
-    public func createNew() -> StringParameter {
+    public static func createNew() -> StringParameter {
         .init(string: "")
     }
     
@@ -63,7 +63,7 @@ public struct ZeroOrMoreParameter: RegexParameter {
         self.components = components
     }
     
-    public func createNew() -> ZeroOrMoreParameter {
+    public static func createNew() -> ZeroOrMoreParameter {
         .init(behaviour: nil, components: [])
     }
     
@@ -88,7 +88,7 @@ public struct OneOrMoreParameter: RegexParameter {
         self.components = components
     }
     
-    public func createNew() -> OneOrMoreParameter {
+    public static func createNew() -> OneOrMoreParameter {
         .init(behaviour: nil, components: [])
     }
     
@@ -113,7 +113,7 @@ public struct OptionallyParameter: RegexParameter {
         self.components = components
     }
     
-    public func createNew() -> OptionallyParameter {
+    public static func createNew() -> OptionallyParameter {
         .init(behaviour: nil, components: [])
     }
     
@@ -140,7 +140,7 @@ public struct RepeatParameter: RegexParameter {
         self.components = components
     }
     
-    public func createNew() -> RepeatParameter {
+    public static func createNew() -> RepeatParameter {
         .init(range: 1..<2, behaviour: nil, components: [])
     }
     
@@ -199,7 +199,7 @@ public struct LookaheadParameter: RegexParameter {
         self.components = components
     }
     
-    public func createNew() -> LookaheadParameter {
+    public static func createNew() -> LookaheadParameter {
         .init(negative: false, components: [])
     }
     
@@ -222,7 +222,7 @@ public struct ChoiceOfParameter: RegexParameter {
         self.components = components
     }
     
-    public func createNew() -> ChoiceOfParameter {
+    public static func createNew() -> ChoiceOfParameter {
         .init(components: [])
     }
     
@@ -277,7 +277,7 @@ public struct AnchorParameter: RegexParameter {
         self.boundary = boundary
     }
     
-    public func createNew() -> AnchorParameter {
+    public static func createNew() -> AnchorParameter {
         .init(boundary: .wordBoundary)
     }
     
