@@ -57,7 +57,7 @@ public extension ComponentModel {
         
         /// Others
         case lookahead
-        case choiceOf   
+        case choiceOf
         
         public var displayTitle: String {
             switch self {
@@ -77,6 +77,27 @@ public extension ComponentModel {
                 return "Lookahead"
             case .choiceOf:
                 return "Choice Of"
+            }
+        }
+        
+        public func createNew() -> ComponentModel {
+            switch self {
+            case .string:
+                return .string(.createNew())
+            case .anchor:
+                return .anchor(.createNew())
+            case .zeroOrMore:
+                return .zeroOrMore(.createNew())
+            case .oneOrMore:
+                return .oneOrMore(.createNew())
+            case .optionally:
+                return .optionally(.createNew())
+            case .repeat:
+                return .repeat(.createNew())
+            case .lookahead:
+                return .lookahead(.createNew())
+            case .choiceOf:
+                return .choiceOf(.createNew())
             }
         }
     }
