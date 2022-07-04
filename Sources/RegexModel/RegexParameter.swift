@@ -252,7 +252,7 @@ public struct AnchorParameter: RegexParameter {
     
     /// Thin wrapper enum around static vars.
     /// Mirrors internal `Kind` at source https://github.com/apple/swift-experimental-string-processing/blob/290ce1060beb906e62ac54d4debf13cfbb992b6b/Sources/RegexBuilder/Anchor.swift
-    public enum Boundary {
+    public enum Boundary: Int, CaseIterable {
         case endOfLine
         case endOfSubject
         case endOfSubjectBeforeNewline
@@ -261,6 +261,27 @@ public struct AnchorParameter: RegexParameter {
         case startOfSubject
         case textSegmentBoundary
         case wordBoundary
+        
+        public var displayTitle: String {
+            switch self {
+            case .endOfLine:
+                return "End of Line"
+            case .endOfSubject:
+                return "End of Subject"
+            case .endOfSubjectBeforeNewline:
+                return "End of Subject Before Newline"
+            case .firstMatchingPositionInSubject:
+                return "First Matching Position in Subject"
+            case .startOfLine:
+                return "Start of Line"
+            case .startOfSubject:
+                return "Start of Subject"
+            case .textSegmentBoundary:
+                return "Text Segment Boundary"
+            case .wordBoundary:
+                return "Word Boundary"
+            }
+        }
         
         public var anchor: Anchor {
             switch self {
