@@ -262,6 +262,8 @@ public struct AnchorParameter: RegexParameter {
         case textSegmentBoundary
         case wordBoundary
         
+        public static let `default`: Self = .wordBoundary
+        
         public var displayTitle: String {
             switch self {
             case .endOfLine:
@@ -315,7 +317,7 @@ public struct AnchorParameter: RegexParameter {
     }
     
     public static func createNew() -> AnchorParameter {
-        .init(boundary: .wordBoundary)
+        .init(boundary: .default)
     }
     
     public func regex() -> Regex<Substring> {
