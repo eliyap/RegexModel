@@ -54,21 +54,27 @@ public struct StringParameter: RegexParameter {
 
 // MARK: - Quantifiers
 /// `One` omitted, I don't see the point
+extension RegexRepetitionBehavior {
+    /// Based on snippets from proposal
+    /// https://github.com/apple/swift-experimental-string-processing/blob/main/Documentation/Evolution/RegexBuilderDSL.md#quantification
+    public static let `default`: RegexRepetitionBehavior = .eager
+}
+
 public struct ZeroOrMoreParameter: RegexParameter {
     
     public let id = UUID().uuidString
     public let proxy: ComponentModel.Proxy = .zeroOrMore
     
-    public var behaviour: RegexRepetitionBehavior? = nil
+    public var behaviour: RegexRepetitionBehavior
     public var components: [ComponentModel]
     
-    public init(behaviour: RegexRepetitionBehavior? = nil, components: [ComponentModel]) {
+    public init(behaviour: RegexRepetitionBehavior = .default, components: [ComponentModel]) {
         self.behaviour = behaviour
         self.components = components
     }
     
     public static func createNew() -> ZeroOrMoreParameter {
-        .init(behaviour: nil, components: [])
+        .init(behaviour: .default, components: [])
     }
     
     public func regex() -> Regex<Substring> {
@@ -85,16 +91,16 @@ public struct OneOrMoreParameter: RegexParameter {
     public let id = UUID().uuidString
     public let proxy: ComponentModel.Proxy = .oneOrMore
     
-    public var behaviour: RegexRepetitionBehavior? = nil
+    public var behaviour: RegexRepetitionBehavior
     public var components: [ComponentModel]
     
-    public init(behaviour: RegexRepetitionBehavior? = nil, components: [ComponentModel]) {
+    public init(behaviour: RegexRepetitionBehavior = .default, components: [ComponentModel]) {
         self.behaviour = behaviour
         self.components = components
     }
     
     public static func createNew() -> OneOrMoreParameter {
-        .init(behaviour: nil, components: [])
+        .init(behaviour: .default, components: [])
     }
     
     public func regex() -> Regex<Substring> {
@@ -111,16 +117,16 @@ public struct OptionallyParameter: RegexParameter {
     public let id = UUID().uuidString
     public let proxy: ComponentModel.Proxy = .optionally
     
-    public var behaviour: RegexRepetitionBehavior? = nil
+    public var behaviour: RegexRepetitionBehavior = .default
     public var components: [ComponentModel]
     
-    public init(behaviour: RegexRepetitionBehavior? = nil, components: [ComponentModel]) {
+    public init(behaviour: RegexRepetitionBehavior = .default, components: [ComponentModel]) {
         self.behaviour = behaviour
         self.components = components
     }
     
     public static func createNew() -> OptionallyParameter {
-        .init(behaviour: nil, components: [])
+        .init(behaviour: .default, components: [])
     }
     
     public func regex() -> Regex<Substring> {
@@ -138,17 +144,17 @@ public struct RepeatParameter: RegexParameter {
     public let proxy: ComponentModel.Proxy = .repeat
     
     public var range: Range<Int>
-    public var behaviour: RegexRepetitionBehavior? = nil
+    public var behaviour: RegexRepetitionBehavior = .default
     public var components: [ComponentModel]
     
-    public init(range: Range<Int>, behaviour: RegexRepetitionBehavior? = nil, components: [ComponentModel]) {
+    public init(range: Range<Int>, behaviour: RegexRepetitionBehavior = .default, components: [ComponentModel]) {
         self.range = range
         self.behaviour = behaviour
         self.components = components
     }
     
     public static func createNew() -> RepeatParameter {
-        .init(range: 1..<2, behaviour: nil, components: [])
+        .init(range: 1..<2, behaviour: .default, components: [])
     }
     
     public func regex() -> Regex<Substring> {
