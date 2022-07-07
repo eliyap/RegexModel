@@ -69,7 +69,7 @@ final class RegexModelTests: XCTestCase {
     func testLookahead() throws {
         pattern = [
             .string(.init(string: "q")),
-            .lookahead(.init(negative: true, components: [
+            .negativeLookahead(.init(components: [
                 .string(.init(string: "u")),
             ]))
         ].regex()
