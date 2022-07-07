@@ -226,7 +226,7 @@ public struct LookaheadParameter: RegexParameter {
 public struct NegativeLookaheadParameter: RegexParameter {
     
     public let id = UUID().uuidString
-    public let proxy: ComponentModel.Proxy = .lookahead
+    public let proxy: ComponentModel.Proxy = .negativeLookahead
     
     public var components: [ComponentModel]
     
