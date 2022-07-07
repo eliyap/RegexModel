@@ -113,7 +113,10 @@ extension ComponentModel {
 
                 case .lookahead(let lookaheadParameter):
                     return lookaheadParameter.components[index][subpath]
-
+                    
+                case .negativeLookahead(let negativeLookaheadParameter):
+                    return negativeLookaheadParameter.components[index][subpath]
+                    
                 case .choiceOf(let choiceOfParameter):
                     return choiceOfParameter.components[index][subpath]
                 }
@@ -152,6 +155,10 @@ extension ComponentModel {
                     lookaheadParameter.components[index][subpath] = newValue
                     self = .lookahead(lookaheadParameter)
                 
+                case .negativeLookahead(var negativeLookaheadParameter):
+                    negativeLookaheadParameter.components[index][subpath] = newValue
+                    self = .negativeLookahead(negativeLookaheadParameter)
+                    
                 case .choiceOf(var choiceOfParameter):
                     choiceOfParameter.components[index][subpath] = newValue
                     self = .choiceOf(choiceOfParameter)
@@ -200,6 +207,10 @@ extension ComponentModel {
             params.components.insert(component, at: index)
             self = .lookahead(params)
             
+        case .negativeLookahead(var params):
+            params.components.insert(component, at: index)
+            self = .negativeLookahead(params)
+            
         case .choiceOf(var params):
             params.components.insert(component, at: index)
             self = .choiceOf(params)
@@ -233,6 +244,9 @@ extension ComponentModel {
             case .lookahead(var params):
                 params.components.remove(at: index)
                 self = .lookahead(params)
+            case .negativeLookahead(var params):
+                params.components.remove(at: index)
+                self = .negativeLookahead(params)
             case .choiceOf(var params):
                 params.components.remove(at: index)
                 self = .choiceOf(params)
@@ -258,6 +272,9 @@ extension ComponentModel {
             case .lookahead(var params):
                 params.components[index].delete(at: subpath)
                 self = .lookahead(params)
+            case .negativeLookahead(var params):
+                params.components[index].delete(at: subpath)
+                self = .negativeLookahead(params)
             case .choiceOf(var params):
                 params.components[index].delete(at: subpath)
                 self = .choiceOf(params)
@@ -296,7 +313,10 @@ public extension ComponentModel {
         
         case .lookahead(let lookaheadParameter):
             components = lookaheadParameter.components
-        
+            
+        case .negativeLookahead(let negativeLookaheadParameter):
+            components = negativeLookaheadParameter.components
+            
         case .choiceOf(let choiceOfParameter):
             components = choiceOfParameter.components
         }

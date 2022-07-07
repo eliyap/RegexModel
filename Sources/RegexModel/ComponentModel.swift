@@ -20,6 +20,7 @@ public enum ComponentModel {
     
     /// Others
     case lookahead(LookaheadParameter)
+    case negativeLookahead(NegativeLookaheadParameter)
     case choiceOf(ChoiceOfParameter)
     case anchor(AnchorParameter)
     
@@ -42,6 +43,9 @@ public enum ComponentModel {
 
         case .lookahead(let lookaheadParameter):
             return lookaheadParameter.regex()
+            
+        case .negativeLookahead(let negativeLookaheadParameter):
+            return negativeLookaheadParameter.regex()
 
         case .choiceOf(let choiceOfParameter):
             return choiceOfParameter.regex()
@@ -59,22 +63,24 @@ extension ComponentModel: Hashable { }
 extension ComponentModel: Identifiable {
     public var id: String {
         switch self {
-        case .string(let stringParameter):
-            return stringParameter.id
-        case .zeroOrMore(let zeroOrMoreParameter):
-            return zeroOrMoreParameter.id
-        case .oneOrMore(let oneOrMoreParameter):
-            return oneOrMoreParameter.id
-        case .optionally(let optionallyParameter):
-            return optionallyParameter.id
-        case .repeat(let repeatParameter):
-            return repeatParameter.id
-        case .lookahead(let lookaheadParameter):
-            return lookaheadParameter.id
-        case .choiceOf(let choiceOfParameter):
-            return choiceOfParameter.id
-        case .anchor(let anchorParameter):
-            return anchorParameter.id
+        case .string(let params):
+            return params.id
+        case .zeroOrMore(let params):
+            return params.id
+        case .oneOrMore(let params):
+            return params.id
+        case .optionally(let params):
+            return params.id
+        case .repeat(let params):
+            return params.id
+        case .lookahead(let params):
+            return params.id
+        case .negativeLookahead(let params):
+            return params.id
+        case .choiceOf(let params):
+            return params.id
+        case .anchor(let params):
+            return params.id
         }
     }
 }

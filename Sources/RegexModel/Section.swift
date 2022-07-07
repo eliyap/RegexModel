@@ -57,6 +57,7 @@ public extension ComponentModel {
         
         /// Others
         case lookahead
+        case negativeLookahead
         case choiceOf
         
         public var displayTitle: String {
@@ -75,6 +76,8 @@ public extension ComponentModel {
                 return "Repeat"
             case .lookahead:
                 return "Lookahead"
+            case .negativeLookahead:
+                return "Negative Lookahead"
             case .choiceOf:
                 return "Choice Of"
             }
@@ -96,6 +99,8 @@ public extension ComponentModel {
                 return .repeat(.createNew())
             case .lookahead:
                 return .lookahead(.createNew())
+            case .negativeLookahead:
+                return .negativeLookahead(.createNew())
             case .choiceOf:
                 return .choiceOf(.createNew())
             }
@@ -116,6 +121,8 @@ public extension ComponentModel {
             return .repeat
         case .lookahead:
             return .lookahead
+        case .negativeLookahead:
+            return .negativeLookahead
         case .choiceOf:
             return .choiceOf
         case .anchor:
@@ -131,7 +138,7 @@ public extension ComponentModel.Proxy {
             return .text
         case .zeroOrMore, .oneOrMore, .optionally, .repeat:
             return .quantifier
-        case .lookahead, .choiceOf:
+        case .lookahead, .negativeLookahead, .choiceOf:
             return .other
         }
     }

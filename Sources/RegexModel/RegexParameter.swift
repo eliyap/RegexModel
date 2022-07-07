@@ -204,22 +204,43 @@ public struct LookaheadParameter: RegexParameter {
     public let id = UUID().uuidString
     public let proxy: ComponentModel.Proxy = .lookahead
     
-    public var negative: Bool
-    
     public var components: [ComponentModel]
     
-    public init(negative: Bool, components: [ComponentModel]) {
-        self.negative = negative
+    public init(components: [ComponentModel]) {
         self.components = components
     }
     
     public static func createNew() -> LookaheadParameter {
-        .init(negative: false, components: [])
+        .init(components: [])
     }
     
     public func regex() -> Regex<Substring> {
         Regex {
-            Lookahead(negative: negative) {
+            Lookahead {
+                components.regex()
+            }
+        }
+    }
+}
+
+public struct NegativeLookaheadParameter: RegexParameter {
+    
+    public let id = UUID().uuidString
+    public let proxy: ComponentModel.Proxy = .lookahead
+    
+    public var components: [ComponentModel]
+    
+    public init(components: [ComponentModel]) {
+        self.components = components
+    }
+    
+    public static func createNew() -> NegativeLookaheadParameter {
+        .init(components: [])
+    }
+    
+    public func regex() -> Regex<Substring> {
+        Regex {
+            NegativeLookahead {
                 components.regex()
             }
         }
