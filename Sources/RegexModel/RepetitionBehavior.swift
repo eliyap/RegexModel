@@ -38,5 +38,7 @@ public enum RepetitionBehavior: Int, Hashable, Codable, CaseIterable {
         }
     }
     
+    public var displayTitle: String { behavior.displayTitle }
+    
     public static var `default`: Self { .init(behavior: .default)! }
 }
