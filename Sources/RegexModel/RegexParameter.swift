@@ -263,9 +263,7 @@ public struct ChoiceOfParameter: RegexParameter {
     }
     
     public func regex() -> Regex<Substring> {
-        Regex {
-            components.choice()
-        }
+        components.choice()
     }
 }
 
