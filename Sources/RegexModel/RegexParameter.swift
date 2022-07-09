@@ -32,8 +32,8 @@ public protocol RegexParameter: Hashable, Identifiable {
 /// `Character` omitted.
 public struct StringParameter: RegexParameter {
     
-    public let id = UUID().uuidString
-    public let proxy: ComponentModel.Proxy = .string
+    public private(set) var id = UUID().uuidString
+    public private(set) var proxy: ComponentModel.Proxy = .string
     
     public var string: String
     
@@ -62,8 +62,8 @@ extension RegexRepetitionBehavior {
 
 public struct ZeroOrMoreParameter: RegexParameter {
     
-    public let id = UUID().uuidString
-    public let proxy: ComponentModel.Proxy = .zeroOrMore
+    public private(set) var id = UUID().uuidString
+    public private(set) var proxy: ComponentModel.Proxy = .zeroOrMore
     
     public var behaviour: RegexRepetitionBehavior
     public var components: [ComponentModel]
@@ -88,8 +88,8 @@ public struct ZeroOrMoreParameter: RegexParameter {
 
 public struct OneOrMoreParameter: RegexParameter {
     
-    public let id = UUID().uuidString
-    public let proxy: ComponentModel.Proxy = .oneOrMore
+    public private(set) var id = UUID().uuidString
+    public private(set) var proxy: ComponentModel.Proxy = .oneOrMore
     
     public var behaviour: RegexRepetitionBehavior
     public var components: [ComponentModel]
@@ -114,8 +114,8 @@ public struct OneOrMoreParameter: RegexParameter {
 
 public struct OptionallyParameter: RegexParameter {
     
-    public let id = UUID().uuidString
-    public let proxy: ComponentModel.Proxy = .optionally
+    public private(set) var id = UUID().uuidString
+    public private(set) var proxy: ComponentModel.Proxy = .optionally
     
     public var behaviour: RegexRepetitionBehavior = .default
     public var components: [ComponentModel]
@@ -140,8 +140,8 @@ public struct OptionallyParameter: RegexParameter {
 
 public struct RepeatParameter: RegexParameter {
     
-    public let id = UUID().uuidString
-    public let proxy: ComponentModel.Proxy = .repeat
+    public private(set) var id = UUID().uuidString
+    public private(set) var proxy: ComponentModel.Proxy = .repeat
     
     public var range: Range<Int>
     public var behaviour: RegexRepetitionBehavior = .default
@@ -201,8 +201,8 @@ public struct RepeatParameter: RegexParameter {
 // MARK: - Others
 public struct LookaheadParameter: RegexParameter {
     
-    public let id = UUID().uuidString
-    public let proxy: ComponentModel.Proxy = .lookahead
+    public private(set) var id = UUID().uuidString
+    public private(set) var proxy: ComponentModel.Proxy = .lookahead
     
     public var components: [ComponentModel]
     
@@ -225,8 +225,8 @@ public struct LookaheadParameter: RegexParameter {
 
 public struct NegativeLookaheadParameter: RegexParameter {
     
-    public let id = UUID().uuidString
-    public let proxy: ComponentModel.Proxy = .negativeLookahead
+    public private(set) var id = UUID().uuidString
+    public private(set) var proxy: ComponentModel.Proxy = .negativeLookahead
     
     public var components: [ComponentModel]
     
@@ -249,8 +249,8 @@ public struct NegativeLookaheadParameter: RegexParameter {
 
 public struct ChoiceOfParameter: RegexParameter {
     
-    public let id = UUID().uuidString
-    public let proxy: ComponentModel.Proxy = .choiceOf
+    public private(set) var id = UUID().uuidString
+    public private(set) var proxy: ComponentModel.Proxy = .choiceOf
     
     public var components: [ComponentModel]
     
@@ -328,8 +328,8 @@ public struct AnchorParameter: RegexParameter {
         }
     }
     
-    public let id = UUID().uuidString
-    public let proxy: ComponentModel.Proxy = .anchor
+    public private(set) var id = UUID().uuidString
+    public private(set) var proxy: ComponentModel.Proxy = .anchor
     
     public var boundary: Boundary
     
