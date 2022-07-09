@@ -46,6 +46,10 @@ final class RegexModelTests: XCTestCase {
         XCTAssertNotNil(try pattern.wholeMatch(in: "catdogfish"))
         XCTAssertNotNil(try pattern.wholeMatch(in: "dogcatfish"))
         XCTAssertNotNil(try pattern.wholeMatch(in: "fishdogcat"))
+        
+        /// Check empty choice is not a crasher.
+        pattern = ComponentModel.choiceOf(.init(components: [
+        ])).regex()
     }
     
     func testAnchor() throws {
