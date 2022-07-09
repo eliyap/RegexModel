@@ -13,7 +13,7 @@ public enum RepetitionBehavior: Int, Hashable, Codable, CaseIterable {
     case eager      = 1
     case possessive = 2
     
-    var behavior: RegexRepetitionBehavior {
+    public var behavior: RegexRepetitionBehavior {
         switch self {
         case .reluctant:
             return .reluctant
@@ -24,7 +24,7 @@ public enum RepetitionBehavior: Int, Hashable, Codable, CaseIterable {
         }
     }
     
-    init?(behavior: RegexRepetitionBehavior) {
+    public init?(behavior: RegexRepetitionBehavior) {
         switch behavior {
         case .reluctant:
             self = .reluctant
@@ -38,5 +38,5 @@ public enum RepetitionBehavior: Int, Hashable, Codable, CaseIterable {
         }
     }
     
-    var `default`: Self { .init(behavior: .default)! }
+    public static var `default`: Self { .init(behavior: .default)! }
 }

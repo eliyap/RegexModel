@@ -65,21 +65,21 @@ public struct ZeroOrMoreParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
     public private(set) var proxy: ComponentModel.Proxy = .zeroOrMore
     
-    public var behaviour: RegexRepetitionBehavior
+    public var behavior: RepetitionBehavior
     public var components: [ComponentModel]
     
-    public init(behaviour: RegexRepetitionBehavior = .default, components: [ComponentModel]) {
-        self.behaviour = behaviour
+    public init(behavior: RepetitionBehavior = .default, components: [ComponentModel]) {
+        self.behavior = behavior
         self.components = components
     }
     
     public static func createNew() -> ZeroOrMoreParameter {
-        .init(behaviour: .default, components: [])
+        .init(behavior: .default, components: [])
     }
     
     public func regex() -> Regex<Substring> {
         Regex {
-            ZeroOrMore(behaviour) {
+            ZeroOrMore(behavior.behavior) {
                 components.regex()
             }
         }
@@ -91,21 +91,21 @@ public struct OneOrMoreParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
     public private(set) var proxy: ComponentModel.Proxy = .oneOrMore
     
-    public var behaviour: RegexRepetitionBehavior
+    public var behavior: RepetitionBehavior
     public var components: [ComponentModel]
     
-    public init(behaviour: RegexRepetitionBehavior = .default, components: [ComponentModel]) {
-        self.behaviour = behaviour
+    public init(behavior: RepetitionBehavior = .default, components: [ComponentModel]) {
+        self.behavior = behavior
         self.components = components
     }
     
     public static func createNew() -> OneOrMoreParameter {
-        .init(behaviour: .default, components: [])
+        .init(behavior: .default, components: [])
     }
     
     public func regex() -> Regex<Substring> {
         Regex {
-            OneOrMore(behaviour) {
+            OneOrMore(behavior.behavior) {
                 components.regex()
             }
         }
@@ -117,21 +117,21 @@ public struct OptionallyParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
     public private(set) var proxy: ComponentModel.Proxy = .optionally
     
-    public var behaviour: RegexRepetitionBehavior = .default
+    public var behavior: RepetitionBehavior = .default
     public var components: [ComponentModel]
     
-    public init(behaviour: RegexRepetitionBehavior = .default, components: [ComponentModel]) {
-        self.behaviour = behaviour
+    public init(behavior: RepetitionBehavior = .default, components: [ComponentModel]) {
+        self.behavior = behavior
         self.components = components
     }
     
     public static func createNew() -> OptionallyParameter {
-        .init(behaviour: .default, components: [])
+        .init(behavior: .default, components: [])
     }
     
     public func regex() -> Regex<Substring> {
         Regex {
-            Optionally(behaviour) {
+            Optionally(behavior.behavior) {
                 components.regex()
             }
         }
@@ -144,22 +144,22 @@ public struct RepeatParameter: RegexParameter {
     public private(set) var proxy: ComponentModel.Proxy = .repeat
     
     public var range: Range<Int>
-    public var behaviour: RegexRepetitionBehavior = .default
+    public var behavior: RepetitionBehavior = .default
     public var components: [ComponentModel]
     
-    public init(range: Range<Int>, behaviour: RegexRepetitionBehavior = .default, components: [ComponentModel]) {
+    public init(range: Range<Int>, behavior: RepetitionBehavior = .default, components: [ComponentModel]) {
         self.range = range
-        self.behaviour = behaviour
+        self.behavior = behavior
         self.components = components
     }
     
     public static func createNew() -> RepeatParameter {
-        .init(range: 1..<2, behaviour: .default, components: [])
+        .init(range: 1..<2, behavior: .default, components: [])
     }
     
     public func regex() -> Regex<Substring> {
         Regex {
-            Repeat(range, behaviour) {
+            Repeat(range, behavior.behavior) {
                 components.regex()
             }
         }
