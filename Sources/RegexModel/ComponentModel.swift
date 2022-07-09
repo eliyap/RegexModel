@@ -8,7 +8,7 @@
 import Foundation
 import RegexBuilder
 
-public enum ComponentModel {
+public enum ComponentModel: Codable {
     /// Literals
     case string(StringParameter)
     

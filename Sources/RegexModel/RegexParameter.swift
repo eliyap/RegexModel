@@ -12,7 +12,7 @@ import RegexBuilder
 /// e.g. a string regex needs a string.
 /// - Note: `Hashable` required for `ForEach` conformance.
 @available(macOS 13.0, iOS 16, *)
-public protocol RegexParameter: Hashable, Identifiable {
+public protocol RegexParameter: Hashable, Identifiable, Codable {
     
     var id: String { get }
     
@@ -273,7 +273,7 @@ public struct AnchorParameter: RegexParameter {
     
     /// Thin wrapper enum around static vars.
     /// Mirrors internal `Kind` at source https://github.com/apple/swift-experimental-string-processing/blob/290ce1060beb906e62ac54d4debf13cfbb992b6b/Sources/RegexBuilder/Anchor.swift
-    public enum Boundary: Int, CaseIterable {
+    public enum Boundary: Int, CaseIterable, Codable, Hashable {
         case endOfLine
         case endOfSubject
         case endOfSubjectBeforeNewline
