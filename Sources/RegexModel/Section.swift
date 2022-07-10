@@ -29,23 +29,21 @@ public extension ComponentModel {
     }
 }
 
-public extension Color {
-    /// Color for blocks representing "textual" elements,
-    /// including `String`, `Character`, `CharacterClass`, and `Anchor`.
-    static var text: Color { .orange }
-    
-    /// Color for blocks representing "counting" behaviors,
-    /// including `ZeroOrMore`, `OneOrMore`, `Optionally`, `Repeat`, and `One`.
-    static var quantifier: Color { .purple }
-    
-    /// Color for blocks representing or affecting "capturing" behaviors,
-    static var capture: Color { .green }
-    
-    /// Foundation
-    static var foundation: Color { .gray }
-    
-    /// Color for blocks representing other behaviours.
-    static var other: Color { .blue }
+public extension ComponentModel.Section {
+    var color: Color {
+        switch self {
+        case .text:
+            return .orange
+        case .quantifier:
+            return .purple
+        case .capture:
+            return .green
+        case .foundation:
+            return .gray
+        case .other:
+            return .blue
+        }
+    }
 }
 
 public extension ComponentModel {
