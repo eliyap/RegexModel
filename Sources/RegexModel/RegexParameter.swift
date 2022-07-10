@@ -162,36 +162,27 @@ public struct RepeatParameter: RegexParameter {
 }
 
 #warning("TODO: revisit when AnyRegexOuput works")
-//// MARK: - Captures
-//public struct CaptureParameter: RegexParameter {
-//
-//    public static func == (lhs: CaptureParameter, rhs: CaptureParameter) -> Bool {
-//        lhs.id == rhs.id && lhs.components == rhs.components
-//    }
-//
-//    public func hash(into hasher: inout Hasher) {
-//        hasher.combine(id)
-//        hasher.combine(components)
-//    }
-//
-//    public let id = UUID().uuidString
-//
+// MARK: - Captures
+public struct CaptureParameter: RegexParameter {
+
+    public private(set) var id = UUID().uuidString
+    public private(set) var proxy: ComponentModel.Proxy = .capture
+    
 //    public let reference: RegexBuilder.Reference<Substring>
-//
-//    public var components: [ComponentModel]
-//
-//    public func regex() -> Regex<Substring> {
-//        Regex {
-//            Capture(as: reference) { components.regex() }
-//        }
-//    }
-//
-//    public func _regex() -> Regex<(Substring, Substring)> {
-//        Regex {
-//            Capture(as: reference) { components.regex() }
-//        }
-//    }
-//}
+
+    public var components: [ComponentModel]
+
+    public static func createNew() -> CaptureParameter {
+        .init(components: [])
+    }
+    
+    public func regex() -> Regex<Substring> {
+        #warning("temporary workaround")
+        return Regex {
+            One<Substring>(components.regex())
+        }
+    }
+}
 
 // MARK: - Others
 public struct LookaheadParameter: RegexParameter {
