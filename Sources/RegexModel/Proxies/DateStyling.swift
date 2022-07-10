@@ -82,7 +82,8 @@ public enum TimeStyling: Int, Codable, Hashable, CaseIterable {
         }
     }
     
-    /// Personal decision, seems to follow docs.
-    static var `default`: Self = .shortened
+    /// Doesn't follow docs.
+    /// We want to offer a simple match by default.
+    static var `default`: Self = .omitted
 }
 
