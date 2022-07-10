@@ -84,6 +84,7 @@ public indirect enum ModelPath {
     }
 }
 
+extension ModelPath: Hashable { }
 extension ComponentModel {
     public subscript(_ path: ModelPath) -> ComponentModel {
         get {
