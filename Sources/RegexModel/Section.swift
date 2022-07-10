@@ -89,6 +89,20 @@ public extension ComponentModel {
                 return "Optionally"
             case .repeat:
                 return "Repeat"
+            case .dateTime:
+                return "Date / Time"
+            case .currency:
+                return "Currency"
+            case .decimal:
+                return "Decimal"
+            case .wholeNumber:
+                return "Whole Number"
+            case .decimalPercentage:
+                return "Decimal Percentage"
+            case .wholeNumberPercentage:
+                return "Whole Number Percentage"
+            case .url:
+                return "URL"
             case .lookahead:
                 return "Lookahead"
             case .negativeLookahead:
@@ -112,6 +126,20 @@ public extension ComponentModel {
                 return .optionally(.createNew())
             case .repeat:
                 return .repeat(.createNew())
+            case .dateTime:
+                return .dateTime(.createNew())
+            case .currency:
+                return .currency(.createNew())
+            case .decimal:
+                return .decimal(.createNew())
+            case .wholeNumber:
+                return .wholeNumber(.createNew())
+            case .decimalPercentage:    
+                return .decimalPercentage(.createNew())
+            case .wholeNumberPercentage:
+                return .wholeNumberPercentage(.createNew())
+            case .url:
+                return .url(.createNew())
             case .lookahead:
                 return .lookahead(.createNew())
             case .negativeLookahead:
@@ -134,6 +162,20 @@ public extension ComponentModel {
             return .optionally
         case .repeat:
             return .repeat
+        case .dateTime:
+            return .dateTime
+        case .currency:
+            return .currency
+        case .decimal:
+            return .decimal
+        case .wholeNumber:
+            return .wholeNumber
+        case .decimalPercentage:
+            return .decimalPercentage
+        case .wholeNumberPercentage:
+            return .wholeNumberPercentage
+        case .url:
+            return .url
         case .lookahead:
             return .lookahead
         case .negativeLookahead:
@@ -153,6 +195,8 @@ public extension ComponentModel.Proxy {
             return .text
         case .zeroOrMore, .oneOrMore, .optionally, .repeat:
             return .quantifier
+        case .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
+            return .foundation
         case .lookahead, .negativeLookahead, .choiceOf:
             return .other
         }

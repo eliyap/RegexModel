@@ -17,6 +17,15 @@ public enum ComponentModel: Codable {
     case oneOrMore(OneOrMoreParameter)
     case optionally(OptionallyParameter)
     case `repeat`(RepeatParameter)
+
+    /// Foundation
+    case dateTime(DateTimeParameter)
+    case currency(CurrencyParameter)
+    case decimal(DecimalParameter)
+    case wholeNumber(WholeNumberParameter)  
+    case decimalPercentage(DecimalPercentageParameter)
+    case wholeNumberPercentage(WholeNumberPercentageParameter)
+    case url(URLParameter)
     
     /// Others
     case lookahead(LookaheadParameter)
@@ -40,6 +49,27 @@ public enum ComponentModel: Codable {
 
         case .repeat(let repeatParameter):
             return repeatParameter.regex()
+
+        case .dateTime(let dateTimeParameter):
+            return dateTimeParameter.regex()
+
+        case .currency(let currencyParameter):
+            return currencyParameter.regex()
+
+        case .decimal(let decimalParameter):
+            return decimalParameter.regex()
+
+        case .wholeNumber(let wholeNumberParameter):
+            return wholeNumberParameter.regex()
+
+        case .decimalPercentage(let decimalPercentageParameter):
+            return decimalPercentageParameter.regex()
+
+        case .wholeNumberPercentage(let wholeNumberPercentageParameter):
+            return wholeNumberPercentageParameter.regex()
+
+        case .url(let urlParameter):
+            return urlParameter.regex()
 
         case .lookahead(let lookaheadParameter):
             return lookaheadParameter.regex()
@@ -72,6 +102,20 @@ extension ComponentModel: Identifiable {
         case .optionally(let params):
             return params.id
         case .repeat(let params):
+            return params.id
+        case .dateTime(let params):
+            return params.id
+        case .currency(let params):
+            return params.id
+        case .decimal(let params):
+            return params.id
+        case .wholeNumber(let params):
+            return params.id
+        case .decimalPercentage(let params):
+            return params.id
+        case .wholeNumberPercentage(let params):
+            return params.id
+        case .url(let params):
             return params.id
         case .lookahead(let params):
             return params.id
