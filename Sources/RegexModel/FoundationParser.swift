@@ -141,7 +141,7 @@ public struct DecimalParameter {
 }
 
 /// - Note: name changed from "Integer" to be more approachable
-public struct WholeNumberParamter {
+public struct WholeNumberParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
 //    public private(set) var proxy: ComponentModel.Proxy = .string
 
