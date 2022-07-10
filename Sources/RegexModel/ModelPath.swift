@@ -111,6 +111,9 @@ extension ComponentModel {
                 case .repeat(let repeatParameter):
                     return repeatParameter.components[index][subpath]
 
+                case .capture(let captureParameter):
+                    return captureParameter.components[index][subpath]
+
                 case .lookahead(let lookaheadParameter):
                     return lookaheadParameter.components[index][subpath]
                     
@@ -150,6 +153,10 @@ extension ComponentModel {
                 case .repeat(var repeatParameter):
                     repeatParameter.components[index][subpath] = newValue
                     self = .repeat(repeatParameter)
+
+                case .capture(var captureParameter):
+                    captureParameter.components[index][subpath] = newValue
+                    self = .capture(captureParameter)
 
                 case .lookahead(var lookaheadParameter):
                     lookaheadParameter.components[index][subpath] = newValue
@@ -203,6 +210,10 @@ extension ComponentModel {
             params.components.insert(component, at: index)
             self = .repeat(params)
             
+        case .capture(var params):
+            params.components.insert(component, at: index)
+            self = .capture(params)
+        
         case .lookahead(var params):
             params.components.insert(component, at: index)
             self = .lookahead(params)
@@ -241,6 +252,9 @@ extension ComponentModel {
             case .repeat(var params):
                 params.components.remove(at: index)
                 self = .repeat(params)
+            case .capture(var params):
+                params.components.remove(at: index)
+                self = .capture(params)
             case .lookahead(var params):
                 params.components.remove(at: index)
                 self = .lookahead(params)
@@ -269,6 +283,9 @@ extension ComponentModel {
             case .repeat(var params):
                 params.components[index].delete(at: subpath)
                 self = .repeat(params)
+            case .capture(var params):
+                params.components[index].delete(at: subpath)
+                self = .capture(params)
             case .lookahead(var params):
                 params.components[index].delete(at: subpath)
                 self = .lookahead(params)
@@ -310,6 +327,9 @@ public extension ComponentModel {
         
         case .repeat(let repeatParameter):
             components = repeatParameter.components
+        
+        case .capture(let captureParameter):
+            components = captureParameter.components
         
         case .lookahead(let lookaheadParameter):
             components = lookaheadParameter.components

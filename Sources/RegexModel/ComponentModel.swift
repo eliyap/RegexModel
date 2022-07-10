@@ -43,6 +43,9 @@ public enum ComponentModel: Codable {
 
         case .repeat(let repeatParameter):
             return repeatParameter.regex()
+            
+        case .capture(let captureParameter):
+            return captureParameter.regex()
 
         case .lookahead(let lookaheadParameter):
             return lookaheadParameter.regex()
