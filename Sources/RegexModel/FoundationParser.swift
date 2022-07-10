@@ -90,7 +90,7 @@ public struct DateTimeParameter: RegexParameter {
 /// Omitted: Double, which I believe overlaps decimal?
 /// Unsure, though https://fuckingformatstyle.com/#number-style
 
-public struct CurrencyParameter {
+public struct CurrencyParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
 //    public private(set) var proxy: ComponentModel.Proxy = .string
 
@@ -117,7 +117,7 @@ public struct CurrencyParameter {
     }
 }
 
-public struct DecimalParameter {
+public struct DecimalParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
 //    public private(set) var proxy: ComponentModel.Proxy = .string
 
