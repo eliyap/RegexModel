@@ -19,6 +19,9 @@ public protocol RegexParameter: Hashable, Identifiable, Codable {
     var proxy: ComponentModel.Proxy { get }
     
     /// Explicitly generate a new parameter struct.
+    ///
+    /// Non-parameterized factory method lets users create a component without input,
+    /// e.g. with drag'n'drop.
     static func createNew() -> Self
     
     /// Construct the component from the parameters.
