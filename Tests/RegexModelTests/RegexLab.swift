@@ -235,6 +235,42 @@ final class RegexLabTests: XCTestCase {
             One(.url())
         }
     }
+    
+    func testCaptureQuantifiers() throws {
+        let _: Regex<(Substring, Substring?)> = Regex {
+            ZeroOrMore {
+                 Capture {
+                    "a"
+                }
+            }
+        }
+        
+        let _: Regex<(Substring, Substring?)> = Regex {
+            Optionally {
+                Capture {
+                    "a"
+                }
+            }
+        }
+        
+        let _: Regex<(Substring, Substring)> = Regex {
+            OneOrMore {
+                Capture {
+                    "a"
+                }
+            }
+        }
+        
+        /// Inconsistent with pitch at https://github.com/apple/swift-experimental-string-processing/blob/69d23a8a7fe8929a99cdcd76ecaa845a1330274e/Documentation/Evolution/StronglyTypedCaptures.md
+        /// Should be `[Substring]`
+        let _: Regex<(Substring, Substring?)> = Regex {
+            Repeat(count: 3) {
+                Capture {
+                    "a"
+                }
+            }
+        }
+    }
 }
 
 struct NeverCRC: CustomConsumingRegexComponent {
