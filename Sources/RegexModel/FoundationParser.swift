@@ -39,7 +39,7 @@ import RegexBuilder
 //    }
 //}
 
-public struct DateTimeParameter {
+public struct DateTimeParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
 //    public private(set) var proxy: ComponentModel.Proxy = .string
 
