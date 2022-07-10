@@ -42,3 +42,25 @@ public enum RepetitionBehavior: Int, Hashable, Codable, CaseIterable {
     
     public static var `default`: Self { .init(behavior: .default)! }
 }
+
+public extension RegexRepetitionBehavior {
+    var displayTitle: String {
+        switch self {
+        case .reluctant:
+            return "Reluctant"
+        case .eager:
+            return "Eager"
+        case .possessive:
+            return "Possessive"
+        default:
+            assert(false, "Unknown behavior case")
+            return "Unknown"
+        }
+    }
+}
+
+extension RegexRepetitionBehavior {
+    /// Based on snippets from proposal
+    /// https://github.com/apple/swift-experimental-string-processing/blob/main/Documentation/Evolution/RegexBuilderDSL.md#quantification
+    public static let `default`: RegexRepetitionBehavior = .eager
+}
