@@ -199,6 +199,16 @@ public extension ComponentModel.Proxy {
             return .other
         }
     }
+    
+    /// Whether this has child components
+    var hasComponents: Bool {
+        switch self {
+        case .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
+            return false
+        case .zeroOrMore, .oneOrMore, .optionally, .repeat, .lookahead, .negativeLookahead, .choiceOf:
+            return true
+        }
+    }
 }
 
 public extension ComponentModel.Section {
