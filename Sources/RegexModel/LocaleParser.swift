@@ -105,11 +105,14 @@ public struct CurrencyParameter: RegexParameter {
         .init(locale: .autoupdatingCurrent)
     }
 
-    public func regex() throws -> Regex<Substring> {
+    public func regex() -> Regex<Substring> {
         
-        guard let currency = locale.currency else {
+        let currency: Locale.Currency
+        if let localeCurrency = locale.currency {
+            currency = localeCurrency
+        } else {
             assert(false, "Currency unknown")
-            throw LocaleError.noCurrencyForLocale
+            currency = .unknown
         }
         return Regex {
             "" /// Tricks compiler into using `Substring`.

@@ -27,7 +27,7 @@ public protocol RegexParameter: Hashable, Identifiable, Codable {
     /// Construct the component from the parameters.
     /// Since `Regex<Substring>` is a concrete implementation of the `RegexComponent` protocol,
     /// it is a good choice to acheive "type erasure".
-    func regex() throws -> Regex<Substring>
+    func regex() -> Regex<Substring>
     #warning("revisit when AnyRegexOutput is working")
 }
 
