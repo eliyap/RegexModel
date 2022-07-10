@@ -11,7 +11,7 @@ import RegexBuilder
 #warning("Cannot use dynamic string date format")
 //public struct FormattedDateParameter {
 //    public private(set) var id = UUID().uuidString
-////    public private(set) var proxy: ComponentModel.Proxy = .string
+////    public private(set) var proxy: ComponentModel.Proxy = .error
 //
 //    /// Example string: https://www.hackingwithswift.com/example-code/system/how-to-convert-dates-and-times-to-a-string-using-dateformatter
 //    public var format: String = ""
@@ -41,7 +41,7 @@ import RegexBuilder
 
 public struct DateTimeParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
-//    public private(set) var proxy: ComponentModel.Proxy = .string
+    public private(set) var proxy: ComponentModel.Proxy = .dateTime
 
     /// Example string: https://www.hackingwithswift.com/example-code/system/how-to-convert-dates-and-times-to-a-string-using-dateformatter
     public var dateStyle: DateStyling
@@ -82,19 +82,18 @@ public struct DateTimeParameter: RegexParameter {
 #warning("ISO8601 omitted for now")
 //public struct ISO8601DateTimeParameter {
 //    public private(set) var id = UUID().uuidString
-////    public private(set) var proxy: ComponentModel.Proxy = .string
+////    public private(set) var proxy: ComponentModel.Proxy = .error
 //
 //    public var includingFractionalSeconds: Bool
 //    public var dateSeparator
 //}
 
-// MARK: - Locale Parsers
 /// Omitted: Double, which I believe overlaps decimal?
 /// Unsure, though https://fuckingformatstyle.com/#number-style
 
 public struct CurrencyParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
-//    public private(set) var proxy: ComponentModel.Proxy = .string
+    public private(set) var proxy: ComponentModel.Proxy = .currency
 
     public var locale: Locale
 
@@ -121,7 +120,7 @@ public struct CurrencyParameter: RegexParameter {
 
 public struct DecimalParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
-//    public private(set) var proxy: ComponentModel.Proxy = .string
+    public private(set) var proxy: ComponentModel.Proxy = .decimal
 
     public var locale: Locale
 
@@ -145,7 +144,7 @@ public struct DecimalParameter: RegexParameter {
 /// - Note: name changed from "Integer" to be more approachable
 public struct WholeNumberParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
-//    public private(set) var proxy: ComponentModel.Proxy = .string
+    public private(set) var proxy: ComponentModel.Proxy = .wholeNumber
 
     public var locale: Locale
 
@@ -169,7 +168,7 @@ public struct WholeNumberParameter: RegexParameter {
 /// - Note: name changed to be consistent with `Decimal` above, and because `Double` is a CS term.
 public struct DecimalPercentageParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
-//    public private(set) var proxy: ComponentModel.Proxy = .string
+    public private(set) var proxy: ComponentModel.Proxy = .decimalPercentage
 
     public var locale: Locale
 
@@ -193,7 +192,7 @@ public struct DecimalPercentageParameter: RegexParameter {
 /// - Note: name changed from "Integer" to be more approachable
 public struct WholeNumberPercentageParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
-//    public private(set) var proxy: ComponentModel.Proxy = .string
+    public private(set) var proxy: ComponentModel.Proxy = .wholeNumberPercentage
 
     public var locale: Locale
 

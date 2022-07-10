@@ -55,6 +55,14 @@ public extension ComponentModel {
         case optionally
         case `repeat`
         
+        /// Foundation
+        case dateTime
+        case currency
+        case decimal
+        case wholeNumber
+        case decimalPercentage
+        case wholeNumberPercentage
+        
         /// Others
         case lookahead
         case negativeLookahead
