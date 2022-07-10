@@ -51,6 +51,39 @@ final class RegexLabTests: XCTestCase {
             "ing"
         }.firstMatch(in: "string")
     }
+    
+    func testCurrency() throws {
+        let usd = Regex {
+            One(.localizedCurrency(code: .init("usd"), locale: Locale(identifier: "en-US")))
+        }
+        
+        /// testing the limits of permissible currency expressions
+        XCTAssertNotNil(try usd.wholeMatch(in: "$100"))
+        
+        XCTAssertNotNil(try usd.wholeMatch(in: "$1000.00"))
+        XCTAssertNotNil(try usd.wholeMatch(in: "$1000."))
+        
+        XCTAssertNotNil(try usd.wholeMatch(in: "$1000000"))
+        XCTAssertNotNil(try usd.wholeMatch(in: "$1,000,000.00"))
+        XCTAssertNotNil(try usd.wholeMatch(in: "$1 000 000.00"))
+        XCTAssertNotNil(try usd.wholeMatch(in: "$1 000 000"))
+        XCTAssertNotNil(try usd.wholeMatch(in: "$1000.0000000000000000"))
+        
+        XCTAssertNil(try usd.wholeMatch(in: "$10,00"))
+        XCTAssertNil(try usd.wholeMatch(in: "$1,0,0,0"))
+        
+        XCTAssertNil(try usd.wholeMatch(in: "US$1"))
+        XCTAssertNil(try usd.wholeMatch(in: "$perl"))
+        
+        XCTAssertNotNil(try usd.firstMatch(in: "US$1"))
+        
+        
+    }
+    
+    func testLocale() throws {
+        let badLocale = Locale(identifier: "invalid nonsense bad string ⚠️")
+        print(badLocale, badLocale.currency, badLocale.timeZone)
+    }
 }
 
 struct NeverCRC: CustomConsumingRegexComponent {
