@@ -20,7 +20,7 @@ public struct URLParameter: RegexParameter {
         .init()
     }
 
-    public func regex() throws -> Regex<Substring> {
+    public func regex() -> Regex<Substring> {
         
         Regex {
             "" /// Tricks compiler into using `Substring`.
