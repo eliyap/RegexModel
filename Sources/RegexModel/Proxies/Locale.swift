@@ -17,9 +17,14 @@ import SwiftUI
 public extension Locale {
     /// Returns an SF Symbol currency image that match's the device's current locale, for instance dollar in North America, Indian rupee in India, etc.
     var currencySFSymbol: Image {
-        Image(systemName: currencySymbolNameForSFSymbols()
-             /// Default currency symbol will be the Animal Crossing Leaf coin 􁂬 to remain impartial to any specific country
-             ?? "leaf.circle")
+        let symbol: String
+        if let symbolName = currencySymbolNameForSFSymbols() {
+            symbol = symbolName + ".square.fill"
+        } else {
+            /// Default currency symbol will be the Animal Crossing Leaf coin 􁂬 to remain impartial to any specific country
+            symbol = "leaf.circle"
+        }
+        return Image(systemName: symbol)
     }
     
     private func currencySymbolNameForSFSymbols() -> String? {
