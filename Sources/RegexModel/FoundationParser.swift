@@ -165,7 +165,7 @@ public struct WholeNumberParameter: RegexParameter {
 }
 
 /// - Note: name changed to be consistent with `Decimal` above, and because `Double` is a CS term.
-public struct DecimalPercentageParameter {
+public struct DecimalPercentageParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
 //    public private(set) var proxy: ComponentModel.Proxy = .string
 
@@ -189,7 +189,7 @@ public struct DecimalPercentageParameter {
 }
 
 /// - Note: name changed from "Integer" to be more approachable
-public struct WholeNumberPercentageParameter {
+public struct WholeNumberPercentageParameter: RegexParameter {
     public private(set) var id = UUID().uuidString
 //    public private(set) var proxy: ComponentModel.Proxy = .string
 
