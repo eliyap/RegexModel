@@ -62,6 +62,7 @@ public extension ComponentModel {
         case wholeNumber
         case decimalPercentage
         case wholeNumberPercentage
+        case url
         
         /// Others
         case lookahead
