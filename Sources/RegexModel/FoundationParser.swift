@@ -151,7 +151,7 @@ public struct WholeNumberParameter: RegexParameter {
         self.locale = locale
     }
 
-    public static func createNew() -> DecimalParameter {
+    public static func createNew() -> WholeNumberParameter {
         .init(locale: .autoupdatingCurrent)
     }
 
@@ -175,7 +175,7 @@ public struct DecimalPercentageParameter: RegexParameter {
         self.locale = locale
     }
 
-    public static func createNew() -> DecimalParameter {
+    public static func createNew() -> DecimalPercentageParameter {
         .init(locale: .autoupdatingCurrent)
     }
 
@@ -199,7 +199,7 @@ public struct WholeNumberPercentageParameter: RegexParameter {
         self.locale = locale
     }
 
-    public static func createNew() -> DecimalParameter {
+    public static func createNew() -> WholeNumberPercentageParameter {
         .init(locale: .autoupdatingCurrent)
     }
 
