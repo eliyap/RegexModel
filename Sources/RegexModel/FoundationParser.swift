@@ -46,15 +46,17 @@ public struct DateTimeParameter: RegexParameter {
     /// Example string: https://www.hackingwithswift.com/example-code/system/how-to-convert-dates-and-times-to-a-string-using-dateformatter
     public var dateStyle: DateStyling
     public var timeStyle: TimeStyling
+    public var locale: Locale
     #warning("TODO: offer locale and timezone options")
 
-    public init(dateStyle: DateStyling, timeStyle: TimeStyling) {
+    public init(dateStyle: DateStyling, timeStyle: TimeStyling, locale: Locale) {
         self.dateStyle = dateStyle
         self.timeStyle = timeStyle
+        self.locale = locale
     }
 
     public static func createNew() -> DateTimeParameter {
-        .init(dateStyle: .default, timeStyle: .default)
+        .init(dateStyle: .default, timeStyle: .default, locale: .autoupdatingCurrent)
     }
 
     public func regex() -> Regex<Substring> {
@@ -70,7 +72,7 @@ public struct DateTimeParameter: RegexParameter {
             Date.ParseStrategy.dateTime(
                 date: dateStyle.style,
                 time: timeStyle.style,
-                locale: .current,
+                locale: locale,
                 timeZone: .current
             )
         }
