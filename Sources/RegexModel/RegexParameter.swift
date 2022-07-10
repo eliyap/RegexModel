@@ -54,11 +54,6 @@ public struct StringParameter: RegexParameter {
 
 // MARK: - Quantifiers
 /// `One` omitted, I don't see the point
-extension RegexRepetitionBehavior {
-    /// Based on snippets from proposal
-    /// https://github.com/apple/swift-experimental-string-processing/blob/main/Documentation/Evolution/RegexBuilderDSL.md#quantification
-    public static let `default`: RegexRepetitionBehavior = .eager
-}
 
 public struct ZeroOrMoreParameter: RegexParameter {
     
