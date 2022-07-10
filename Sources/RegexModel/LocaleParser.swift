@@ -132,7 +132,7 @@ public struct DecimalParameter: RegexParameter {
         .init(locale: .autoupdatingCurrent)
     }
 
-    public func regex() throws -> Regex<Substring> {
+    public func regex() -> Regex<Substring> {
         
         return Regex {
             "" /// Tricks compiler into using `Substring`.
@@ -156,7 +156,7 @@ public struct WholeNumberParameter: RegexParameter {
         .init(locale: .autoupdatingCurrent)
     }
 
-    public func regex() throws -> Regex<Substring> {
+    public func regex() -> Regex<Substring> {
         
         return Regex {
             "" /// Tricks compiler into using `Substring`.
@@ -180,7 +180,7 @@ public struct DecimalPercentageParameter: RegexParameter {
         .init(locale: .autoupdatingCurrent)
     }
 
-    public func regex() throws -> Regex<Substring> {
+    public func regex() -> Regex<Substring> {
         
         return Regex {
             "" /// Tricks compiler into using `Substring`.
@@ -204,7 +204,7 @@ public struct WholeNumberPercentageParameter: RegexParameter {
         .init(locale: .autoupdatingCurrent)
     }
 
-    public func regex() throws -> Regex<Substring> {
+    public func regex() -> Regex<Substring> {
         
         return Regex {
             "" /// Tricks compiler into using `Substring`.
