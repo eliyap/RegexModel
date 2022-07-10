@@ -85,6 +85,7 @@ public indirect enum ModelPath {
 }
 
 extension ModelPath: Hashable { }
+
 extension ComponentModel {
     public subscript(_ path: ModelPath) -> ComponentModel {
         get {
@@ -97,26 +98,33 @@ extension ComponentModel {
                 case .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
                     fatalError("Cannot index into leaf node \(self)")
 
-                case .zeroOrMore(let zeroOrMoreParameter):
-                    return zeroOrMoreParameter.components[index][subpath]
+                case .zeroOrMore(let params):
+                    assert(params.components.indices ~= index, "Bad Index \(index)")
+                    return params.components[index][subpath]
 
-                case .oneOrMore(let oneOrMoreParameter):
-                    return oneOrMoreParameter.components[index][subpath]
+                case .oneOrMore(let params):
+                    assert(params.components.indices ~= index, "Bad Index \(index)")
+                    return params.components[index][subpath]
 
-                case .optionally(let optionallyParameter):
-                    return optionallyParameter.components[index][subpath]
+                case .optionally(let params):
+                    assert(params.components.indices ~= index, "Bad Index \(index)")
+                    return params.components[index][subpath]
 
-                case .repeat(let repeatParameter):
-                    return repeatParameter.components[index][subpath]
+                case .repeat(let params):
+                    assert(params.components.indices ~= index, "Bad Index \(index)")
+                    return params.components[index][subpath]
 
-                case .lookahead(let lookaheadParameter):
-                    return lookaheadParameter.components[index][subpath]
+                case .lookahead(let params):
+                    assert(params.components.indices ~= index, "Bad Index \(index)")
+                    return params.components[index][subpath]
                     
-                case .negativeLookahead(let negativeLookaheadParameter):
-                    return negativeLookaheadParameter.components[index][subpath]
+                case .negativeLookahead(let params):
+                    assert(params.components.indices ~= index, "Bad Index \(index)")
+                    return params.components[index][subpath]
                     
-                case .choiceOf(let choiceOfParameter):
-                    return choiceOfParameter.components[index][subpath]
+                case .choiceOf(let params):
+                    assert(params.components.indices ~= index, "Bad Index \(index)")
+                    return params.components[index][subpath]
                 }
             }
         }
