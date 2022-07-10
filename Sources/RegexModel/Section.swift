@@ -55,6 +55,9 @@ public extension ComponentModel {
         case optionally
         case `repeat`
         
+        /// Captures
+        case capture
+        
         /// Others
         case lookahead
         case negativeLookahead
@@ -74,6 +77,8 @@ public extension ComponentModel {
                 return "Optionally"
             case .repeat:
                 return "Repeat"
+            case .capture:
+                return "Capture"
             case .lookahead:
                 return "Lookahead"
             case .negativeLookahead:
@@ -97,6 +102,8 @@ public extension ComponentModel {
                 return .optionally(.createNew())
             case .repeat:
                 return .repeat(.createNew())
+            case .capture:
+                return .capture(.createNew())
             case .lookahead:
                 return .lookahead(.createNew())
             case .negativeLookahead:
@@ -119,6 +126,8 @@ public extension ComponentModel {
             return .optionally
         case .repeat:
             return .repeat
+        case .capture:
+            return .capture
         case .lookahead:
             return .lookahead
         case .negativeLookahead:
@@ -138,6 +147,8 @@ public extension ComponentModel.Proxy {
             return .text
         case .zeroOrMore, .oneOrMore, .optionally, .repeat:
             return .quantifier
+        case .capture:
+            return .capture
         case .lookahead, .negativeLookahead, .choiceOf:
             return .other
         }

@@ -18,6 +18,9 @@ public enum ComponentModel: Codable {
     case optionally(OptionallyParameter)
     case `repeat`(RepeatParameter)
     
+    /// Captures
+    case capture(CaptureParameter)
+    
     /// Others
     case lookahead(LookaheadParameter)
     case negativeLookahead(NegativeLookaheadParameter)
@@ -72,6 +75,8 @@ extension ComponentModel: Identifiable {
         case .optionally(let params):
             return params.id
         case .repeat(let params):
+            return params.id
+        case .capture(let params):
             return params.id
         case .lookahead(let params):
             return params.id
