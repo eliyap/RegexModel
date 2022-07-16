@@ -219,7 +219,7 @@ public struct LookaheadParameter: RegexParameter {
     
     public func regex() -> Regex<Substring> {
         Regex {
-            Lookahead(negative: negative) {
+            Lookahead {
                 components.regex()
             }
         }
