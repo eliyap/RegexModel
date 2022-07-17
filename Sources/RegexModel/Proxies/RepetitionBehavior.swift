@@ -8,7 +8,7 @@
 import RegexBuilder
 
 /// A database friendly `enum` representation of the underlying `struct`.
-public enum RepetitionBehavior: Int, Hashable, Codable, CaseIterable {
+public enum RepetitionBehavior: Int, Hashable, Codable, CaseIterable, Sendable {
     case reluctant  = 0
     case eager      = 1
     case possessive = 2

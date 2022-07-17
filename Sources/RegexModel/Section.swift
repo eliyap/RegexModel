@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 public extension ComponentModel {
-    enum Section: Int, CaseIterable, Codable {
+    enum Section: Int, CaseIterable, Codable, Sendable {
         /// Represent "textual" elements,
         /// including `String`, `Character`, `CharacterClass`, and `Anchor`.
         case text = 0
@@ -48,7 +48,7 @@ public extension ComponentModel.Section {
 
 public extension ComponentModel {
     /// Represents the models without the associated values, for table purposes.
-    enum Proxy: String, CaseIterable, Codable {
+    enum Proxy: String, CaseIterable, Codable, Sendable {
         /// Text
         case string
         case anchor
