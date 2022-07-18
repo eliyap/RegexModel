@@ -33,6 +33,26 @@ public protocol RegexParameter: Hashable, Identifiable, Codable, Sendable {
 
 // MARK: - Literals
 /// `Character` omitted.
+public struct CharacterParamter: RegexParameter {
+    
+    public private(set) var id = UUID().uuidString
+    public private(set) var proxy: ComponentModel.Proxy = .character
+    
+    public var characterKind: CharacterKind
+    
+    init(characterKind: CharacterKind) {
+        self.characterKind = characterKind
+    }
+    
+    public static func createNew() -> CharacterParamter {
+        return .init(characterKind: .default)
+    }
+    
+    public func regex() -> Regex<Substring> {
+        Regex { characterKind.characterClass }
+    }
+}
+
 public struct StringParameter: RegexParameter {
     
     public private(set) var id = UUID().uuidString

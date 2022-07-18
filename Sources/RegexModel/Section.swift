@@ -50,6 +50,7 @@ public extension ComponentModel {
     /// Represents the models without the associated values, for table purposes.
     enum Proxy: String, CaseIterable, Codable, Sendable {
         /// Text
+        case character
         case string
         case anchor
         
@@ -75,6 +76,8 @@ public extension ComponentModel {
         
         public var displayTitle: String {
             switch self {
+            case .character:
+                return "Character"
             case .string:
                 return "String"
             case .anchor:
@@ -112,6 +115,8 @@ public extension ComponentModel {
         
         public func createNew() -> ComponentModel {
             switch self {
+            case .character:
+                return .character(.createNew())
             case .string:
                 return .string(.createNew())
             case .anchor:
@@ -150,6 +155,8 @@ public extension ComponentModel {
     
     var proxy: Proxy {
         switch self {
+        case .character:
+            return .character
         case .string:
             return .string
         case .zeroOrMore:
@@ -189,7 +196,7 @@ public extension ComponentModel {
 public extension ComponentModel.Proxy {
     var section: ComponentModel.Section {
         switch self {
-        case .string, .anchor:
+        case .character, .string, .anchor:
             return .text
         case .zeroOrMore, .oneOrMore, .optionally, .repeat:
             return .quantifier
@@ -203,7 +210,7 @@ public extension ComponentModel.Proxy {
     /// Whether this has child components
     var hasComponents: Bool {
         switch self {
-        case .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
+        case .character, .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
             return false
         case .zeroOrMore, .oneOrMore, .optionally, .repeat, .lookahead, .negativeLookahead, .choiceOf:
             return true

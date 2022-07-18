@@ -10,6 +10,7 @@ import RegexBuilder
 
 public enum ComponentModel: Codable, Sendable {
     /// Literals
+    case character(CharacterParamter)
     case string(StringParameter)
     
     /// Quantifiers
@@ -35,6 +36,9 @@ public enum ComponentModel: Codable, Sendable {
     
     func regex() -> Regex<Substring> {
         switch self {
+        case .character(let characterParameter):
+            return characterParameter.regex()
+            
         case .string(let stringParameter):
             return stringParameter.regex()
         
@@ -93,6 +97,8 @@ extension ComponentModel: Hashable { }
 extension ComponentModel: Identifiable {
     public var id: String {
         switch self {
+        case .character(let params):
+            return params.id
         case .string(let params):
             return params.id
         case .zeroOrMore(let params):

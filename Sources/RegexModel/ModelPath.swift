@@ -95,7 +95,7 @@ extension ComponentModel {
             
             case .child(let index, let subpath):
                 switch self {
-                case .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
+                case .character, .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
                     fatalError("Cannot index into leaf node \(self)")
 
                 case .zeroOrMore(let params):
@@ -135,7 +135,7 @@ extension ComponentModel {
             
             case .child(let index, let subpath):
                 switch self {
-                case .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
+                case .character, .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
                     fatalError("Cannot index into leaf node \(self)")
 
                 case .zeroOrMore(var zeroOrMoreParameter):
@@ -187,7 +187,7 @@ extension ComponentModel {
         }
 
         switch self {
-        case .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
+        case .character, .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
             fatalError("\(self) has no children to insert into!")
         
         case .zeroOrMore(var params):
@@ -229,7 +229,7 @@ extension ComponentModel {
         switch subpath {
         case .target:
             switch self {
-            case .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
+            case .character, .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
                 assert(false, "\(self) has no children to remove")
                 return
             case .zeroOrMore(var params):
@@ -257,7 +257,7 @@ extension ComponentModel {
         
         case .child:
             switch self {
-            case .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
+            case .character, .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
                 assert(false, "\(self) has no children to remove")
                 return
             case .zeroOrMore(var params):
@@ -296,7 +296,7 @@ public extension ComponentModel {
         let components: [ComponentModel]
         
         switch self {
-        case .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
+        case .character, .string, .anchor, .dateTime, .currency, .decimal, .wholeNumber, .decimalPercentage, .wholeNumberPercentage, .url:
             return nil
         
         case .zeroOrMore(let zeroOrMoreParameter):
