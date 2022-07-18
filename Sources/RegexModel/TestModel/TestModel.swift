@@ -23,15 +23,7 @@ public struct TestModel {
             }
         
         case .allMatches:
-            var remaining: Substring = Substring(string)
-            var matches: [Substring] = []
-            while let match = try regex.firstMatch(in: remaining) {
-                guard match.output.count > 0 else { break }
-                matches.append(match.output)
-                remaining = remaining[match.endIndex..<remaining.endIndex]
-                print(remaining)
-            }
-            return matches
+            return try regex.allMatches(in: string)
         }
     }
     
